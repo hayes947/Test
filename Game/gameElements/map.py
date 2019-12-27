@@ -47,11 +47,11 @@ class map(sprite):
             self.tiles.append(newRow)
 
         ## Adding testing units to Tiles
-        newUnit = Unit(0, 0, 50, 50, r"\resources\sprites\link.png", "OK BOOMER", 100, 100, 100, 100, 100, 100, 100)
+        newUnit = Unit(0, 0, 50, 50, r"\resources\sprites\link.png", "OK BOOMER", 10, 9, 8, 7, 6, 5, 2)
         self.tiles[2][4].setUnit(newUnit)
         print(str(self.tiles[2][4].unit))
 
-        newEnemy = Enemy(0, 0, 50, 50, r"\resources\sprites\link(enemy).png", "I DON'T LIKE YOU BRUH", 100, 100, 100, 100, 100, 100, 100)
+        newEnemy = Enemy(0, 0, 50, 50, r"\resources\sprites\link(enemy).png", "I DON'T LIKE YOU BRUH", 10, 9, 8, 7, 6, 5, 2, 0)
         self.tiles[5][9].setUnit(newEnemy)
         print(str(self.tiles[5][9].unit))
         ##################################
