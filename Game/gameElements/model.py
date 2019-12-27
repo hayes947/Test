@@ -73,16 +73,18 @@ class model:
                                                 self.tileControlledUnit.getCIndex(),
                                                 self.tileDefendingUnit.getRIndex(),
                                                 self.tileDefendingUnit.getCIndex())
-                                self.map.endTurn();
                                 #Hayce: self.map.attack(self.tileControlledUnit, self.tileDefendingUnit)
                                 #Attack successfully performed (Turn ends)
                                 self.tileControlledUnit.selected = False
                                 self.unitMenu.action = None
                                 self.tileControlledUnit = None
+                                self.map.endTurn();
                             else:
                                 print("Action can't be performed")
                     elif(self.tileControlledUnit != None and self.unitMenu.action == "W"):
-                        #Hong: Check if unit can move to selected tile
+                        #Check if unit can move to selected tile NOT DONE
+
+                        
                         #Moving to tile
                         print("Setting Unit")
                         self.selectedTile.setUnit(self.tileControlledUnit.unit)

@@ -287,10 +287,10 @@ class map(sprite):
                     else:
                         atkr.fatigue+=1
         if(atkr.HP<=0):
-            tiles[atkrX][atkrY].unit=None #there will probably be a function here later for calculating exp gain
+            self.tiles[atkrX][atkrY].unit=None #there will probably be a function here later for calculating exp gain
             
         elif(dfdr.HP<=0):
-            tiles[dfdrX][dfdrY].unit=None #there will probably be a function here later for calculating exp gain
+            self.tiles[dfdrX][dfdrY].unit=None #there will probably be a function here later for calculating exp gain
 
     
     # endTurn()
@@ -300,6 +300,7 @@ class map(sprite):
     def endTurn(self):
         if self.turn==1:
             self.turn=2
+            self.enemyAIUnitSelect()
         elif self.turn==2:
             self.turn=1
             for i in range(map.COLUMNCOUNT):
@@ -328,25 +329,25 @@ class map(sprite):
                 if(ENEMY[0].fatigue==minFatigue):
                     newEList.append(ENEMY)
                 elif(ENEMY[0].fatigue<minFatigue):
-                    newEList.Clear()
+                    newEList.clear()
                     newEList.append(ENEMY)
                     minFatigue=ENEMY[0].fatigue
             self.clearRangeTables()
 
 
         if len(newEList)==0:
-            newEList.Clear()
+            newEList.clear()
             minFatigue=100
             for ENEMY in enemyList:
                 if(ENEMY.AIType==2):
                     if(ENEMY[0].fatigue==minFatigue):
                         newEList.append(ENEMY)
                     elif(ENEMY[0].fatigue<minFatigue):
-                        newEList.Clear()
+                        newEList.clear()
                         newEList.append(ENEMY)
                         minFatigue=ENEMY[0].fatigue
 
-        if len(newEList==0):
+        if len(newEList)==0:
             self.endTurn()
         else:
             selectedEnemy=newEList[0]
@@ -368,7 +369,7 @@ class map(sprite):
                     toAppend=[t[0], t[1]]
                     abcd.append(toAppend)
                 elif minHP>self.tiles[t[0]][t[1]].unit.HP:
-                    abcd.Clear()
+                    abcd.clear()
                     toAppend=[t[0], t[1]]
                     abcd.append(toAppend)
                     minHP=self.tiles[t[0]][t[1]].unit.HP

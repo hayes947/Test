@@ -18,7 +18,6 @@ typeSwitcher = {
 }
 
 class tile(sprite):
-
     BGCOLOR = pygame.Color(95, 111, 58)
     SBGCOLOR = pygame.Color(144, 159, 67)
     MAPTOPMARGIN = 0
