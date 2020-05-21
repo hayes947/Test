@@ -47,13 +47,13 @@ class map(sprite):
             self.tiles.append(newRow)
 
         ## Adding testing units to Tiles
-        newUnit = Unit(0, 0, 50, 50, r"\resources\sprites\link.png", "OK BOOMER", 10, 9, 8, 7, 6, 5, 2)
+        newUnit = Unit(0, 0, 50, 50, r"\resources\sprites\link.png", "Good Boy", 10, 9, 8, 7, 6, 5, 2)
         self.tiles[2][4].setUnit(newUnit)
         print(str(self.tiles[2][4].unit))
 
-        newEnemy = Enemy(0, 0, 50, 50, r"\resources\sprites\link(enemy).png", "I DON'T LIKE YOU BRUH", 10, 9, 8, 7, 6, 5, 2, 0)
-        self.tiles[5][9].setUnit(newEnemy)
-        print(str(self.tiles[5][9].unit))
+        newEnemy = Enemy(0, 0, 50, 50, r"\resources\sprites\link(enemy).png", "I DON'T LIKE YOU", 5, 9, 8, 7, 6, 5, 2, 0)
+        self.tiles[5][8].setUnit(newEnemy)
+        print(str(self.tiles[5][8].unit))
         ##################################
         self.enemies = 1
         self.clearCondition=0
@@ -217,6 +217,8 @@ class map(sprite):
             fatigueAdded=newX-origX+newY-origY
             fatigueAdded=abs(fatigueAdded)
             self.tiles[newX][newY].unit.fatigue+=fatigueAdded
+        else:
+            print("Not a valid move!")
 
     #combat()
     #   Receives coordintes of the tiles of attaker and defender
@@ -255,9 +257,9 @@ class map(sprite):
             hitChanceDfdr=70+dfdr.Skill-self.tiles[atkrX][atkrY].type[3]
             atkrEffectiveDefense=atkr.Defense-dfdr.Skill/2+self.tiles[atkrX][atkrY].type[2]
             if(atkrEffectiveDefense<0):
-                dfdrEffectiveDefense=0
+                atkrEffectiveDefense=0
             if(atkrEffectiveDefense%1 != 0):
-                dfdrEffectiveDefense+=0.5
+                atkrEffectiveDefense+=0.5
 
             dmg2=dfdr.Attack-atkrEffectiveDefense
             if(dmg2<0):

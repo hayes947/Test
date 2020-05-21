@@ -67,31 +67,57 @@ class model:
                             self.unitMenu.action = ""
                         else:
                             if(self.unitMenu.action == "A"):
-                                #Enemy can only be selected if action == Attack
-                                self.tileDefendingUnit = self.selectedTile
-                                self.map.combat(self.tileControlledUnit.getRIndex(),
+                                #Check: is the enemy in range?
+                                unitX=self.tileControlledUnit.getCIndex()
+                                unitY=self.tileControlledUnit.getRIndex()
+                                print("UnitX=", unitX)
+                                print("UnitY=", unitY)
+                                unitMov=self.tileControlledUnit.unit.Movement
+                                self.map.constructRangeTable(unitY,unitX,unitMov)
+                                EnemyX=self.selectedTile.getCIndex()
+                                EnemyY=self.selectedTile.getRIndex()
+                                print("EnemyX=", EnemyX)
+                                print("EnemyY=", EnemyY)
+                                for i in range(10):
+                                    print(self.map.atkRangeTable[i])
+                                if(self.map.atkRangeTable[EnemyY][EnemyX]==1):
+                                    #Enemy can only be selected if action == Attack
+                                    self.tileDefendingUnit = self.selectedTile
+                                    self.map.combat(self.tileControlledUnit.getRIndex(),
                                                 self.tileControlledUnit.getCIndex(),
                                                 self.tileDefendingUnit.getRIndex(),
                                                 self.tileDefendingUnit.getCIndex())
-                                #Hayce: self.map.attack(self.tileControlledUnit, self.tileDefendingUnit)
-                                #Attack successfully performed (Turn ends)
-                                self.tileControlledUnit.selected = False
-                                self.unitMenu.action = None
-                                self.tileControlledUnit = None
-                                self.map.endTurn();
+                                    #Hayce: self.map.attack(self.tileControlledUnit, self.tileDefendingUnit)
+                                    #Attack successfully performed (Turn ends)
+                                    self.tileControlledUnit.selected = False
+                                    self.unitMenu.action = None
+                                    self.tileControlledUnit = None
+                                    self.map.endTurn();
+                                else:
+                                    print("Target is out of range")
+                                self.map.clearRangeTables()
                             else:
                                 print("Action can't be performed")
                     elif(self.tileControlledUnit != None and self.unitMenu.action == "W"):
                         #Check if unit can move to selected tile NOT DONE
-
+                        unitX=self.tileControlledUnit.getCIndex()
+                        unitY=self.tileControlledUnit.getRIndex()
+                        print("UnitX=", unitX)
+                        print("UnitY=", unitY)
+                        unitMov=self.tileControlledUnit.unit.Movement
+                        self.map.constructRangeTable(unitY,unitX,unitMov)
                         
                         #Moving to tile
                         print("Setting Unit")
-                        self.selectedTile.setUnit(self.tileControlledUnit.unit)
-                        print("Unit succesfully set")
-                        self.tileControlledUnit.selected = False
-                        self.tileControlledUnit.unit = None
-                        self.tileControlledUnit = None
+                        newUnitX=self.selectedTile.getCIndex()
+                        newUnitY=self.selectedTile.getRIndex()
+                        if(self.map.rangeTable[newUnitY][newUnitX]==1):
+                            self.selectedTile.setUnit(self.tileControlledUnit.unit)
+                            print("Unit succesfully set")
+                            self.tileControlledUnit.selected = False
+                            self.tileControlledUnit.unit = None
+                            self.tileControlledUnit = None
+                        self.map.clearRangeTables()
             else: #Computer turn
                 #Makes the game crash: self.map.enemyAIUnitSelect()
                 pass
