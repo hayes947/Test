@@ -19,6 +19,9 @@ class Unit(sprite):
         self.maxFatigue=5 #arbitrary value but I believe it's well balanced for the small size of our maps
         self.fatigue=0
 
+        #In Order: HP,Fatigue,Move,Atk,Def,Skl,Spd
+        self.growthRates=[60,10,1,50,50,50,50]
+
     def getX(self):
         return super.getX()
 
