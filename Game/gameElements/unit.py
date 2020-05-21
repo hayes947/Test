@@ -5,6 +5,7 @@ class Unit(sprite):
     def __init__(self, x, y, w, h, img_name, description, hp, attack, defense, skill, speed, xp, movement):
         ## w & h must be attributes of the image to load and not attributes of the tile
         super().__init__(x, y, w, h, img_name)
+        self.MaxHP = hp
         self.HP = hp
         self.Attack = attack
         self.Defense = defense

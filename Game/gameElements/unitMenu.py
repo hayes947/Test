@@ -21,6 +21,7 @@ class unitMenu(sprite):
 
         #Deactivation of button
         #   self.attackB.setActive(False)
+        self.itemsB.setActive(False)
 
     def setUnit(self, unit):
         self.stats.setUnit(unit)
